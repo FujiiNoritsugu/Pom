@@ -13,7 +13,7 @@ impl Pom{
         Pom{
             id:i,
             list:Vec::new(),
-            point:rng.rand() as f32
+            point:rng.random() as f32
         }
     }
 
