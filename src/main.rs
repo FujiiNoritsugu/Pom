@@ -1,10 +1,6 @@
-mod pom;
-mod rand;
-mod consts;
+mod models;
 
-use std::rc::Rc;
-use std::cell::RefCell;
-use crate::pom::Pom;
+use crate::models::pom::Pom;
 use std::rc::Rc;
 use std::cell::RefCell;
 
@@ -30,7 +26,7 @@ fn main() {
         }
     }
 
-    for pom in pom_list_rc.borrow().iter(){
+    for pom in pom_list.iter(){
         // calc_pointが全部おんなじになるなんでや？
         // →ポイントも乱数で作成すると少しは違う値になった
         println!("point:{}",pom.borrow().calc_point());

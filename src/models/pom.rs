@@ -1,4 +1,4 @@
-use crate::rand::Rand;
+use rand::Rng;
 use std::rc::Rc;
 use std::cell::RefCell;
 
@@ -11,11 +11,11 @@ pub struct Pom{
 impl Pom{
     pub fn new(i:i32)->Pom{
         // pointをランダムにしてみる
-        let mut rng = Rand::new(i as u32);
+        let mut rng = rand::thread_rng();
         Pom{
             id:i,
             list:Vec::new(),
-            point:rng.random() as f32
+            point:rng.gen()
         }
     }
 
@@ -24,7 +24,8 @@ impl Pom{
     }
 
     pub fn calc_point(&self)->f32{
-        let mut rng = Rand::new(self.id as u32);
-        self.list.iter().map(|x| x.borrow().point * rng.random() as f32).sum()
+        // 腹持ちのデータからランダムな値の積和を計算するようにする
+        let mut rng = rand::thread_rng();
+        self.list.iter().map(|x| x.borrow().point * rng.gen::<f32>()).sum()
     }
 }
