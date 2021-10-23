@@ -1,11 +1,14 @@
 use rand::Rng;
 use std::rc::Rc;
 use std::cell::RefCell;
+use crate::enums::qom::Qom;
 
+#[derive(Debug)]
 pub struct Pom{
     id:i32,
     list:Vec<Rc<RefCell<Pom>>>,
-    point:f32
+    point:f32,
+    abbrev:Qom,
 }
 
 impl Pom{
@@ -15,7 +18,8 @@ impl Pom{
         Pom{
             id:i,
             list:Vec::new(),
-            point:rng.gen()
+            point:rng.gen(),
+            abbrev:Qom::None,
         }
     }
 
@@ -27,5 +31,14 @@ impl Pom{
         // 腹持ちのデータからランダムな値の積和を計算するようにする
         let mut rng = rand::thread_rng();
         self.list.iter().map(|x| x.borrow().point * rng.gen::<f32>()).sum()
+    }
+
+    pub fn set_abbrev(&mut self, ave:f32){
+        // 自分のポイントが平均よりも上ならばRichを下ならばPoorを設定する
+        if self.point > ave{
+            self.abbrev = Qom::Rich
+        }else{
+            self.abbrev = Qom::Poor
+        }
     }
 }
