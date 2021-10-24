@@ -31,10 +31,15 @@ fn main() {
         // calc_pointが全部おんなじになるなんでや？
         // →ポイントも乱数で作成すると少しは違う値になった
         println!("point:{}",pom.borrow().calc_point());
-        // ポイントの平均値をとって上ならRichを下ならPoorに設定する
-        println!("qom:{:?}", pom.borrow());
     }
 
     // ポイントの平均値をとる
+    // pointをpubにせんといかんのなんとかならんか？
+    let average = pom_list.iter().map(|x| x.borrow().point ).sum::<f32>() / pom_list.len() as f32;
+    // 平均値の上ならRichを下ならPoorに設定する
+    for pom in pom_list.iter(){
+        pom.borrow_mut().set_abbrev(average);
+        println!("qom:{:?}", pom.borrow().abbrev);
+    }
     
 }

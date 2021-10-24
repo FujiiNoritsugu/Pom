@@ -7,8 +7,8 @@ use crate::enums::qom::Qom;
 pub struct Pom{
     id:i32,
     list:Vec<Rc<RefCell<Pom>>>,
-    point:f32,
-    abbrev:Qom,
+    pub point:f32,
+    pub abbrev:Qom,
 }
 
 impl Pom{
