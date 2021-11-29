@@ -1,6 +1,7 @@
 mod pom;
 mod rand;
 mod consts;
+mod enums;
 
 use std::rc::Rc;
 use std::cell::RefCell;
